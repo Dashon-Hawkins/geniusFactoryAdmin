@@ -21,34 +21,34 @@
 
     firstName: {
       type: 'string',
-      required: true,
+      required: 'true',
     },
 
     lastNameInitial: {
       type: 'string',
-      required: true,
+      required: 'true',
     },
 
     city: {
       type: 'string',
-      required: true,
+      required: 'true',
     },
 
     state: {
       type: 'string',
-      required: true,
+      required: 'true',
     },
 
     zipCode: {
       type: 'integer',
-      required: true,
+      required: 'true',
     },
 
 
-    todos: {
-      collection: 'student',
-      via: 'userId',
-    },
+    // todos: {
+    //   collection: 'student',
+    //   via: 'userId',
+    // },
 
     toJSON: function () {
       var obj = this.toObject();
