@@ -46,7 +46,7 @@
            autoIncrement: 'true',
            primaryKey: 'true',
            unique: 'false'
-           }
+         },
 
       }
  };
