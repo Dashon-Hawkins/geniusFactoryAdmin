@@ -11,7 +11,7 @@
 
     email: {
       type: 'string',
-      email: 'true',
+      required: 'true',
       unique: 'true',
     },
 

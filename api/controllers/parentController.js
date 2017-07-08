@@ -5,8 +5,8 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
- var Emailaddresses = require("machinepack-emailaddresses");
- var Passwords = require("machinepack-passwords");
+ Emailaddresses = require("machinepack-emailaddresses");
+ Passwords = require("machinepack-passwords");
 
  module.exports = {
 

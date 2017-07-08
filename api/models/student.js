@@ -13,7 +13,7 @@
 
         email: {
            type: 'string',
-           email: 'true',
+           required: 'true',
            unique: 'true',
          },
 
@@ -41,12 +41,12 @@
              type: 'string'
            },
 
-        id: {
-           type: 'integer',
-           autoIncrement: 'true',
-           primaryKey: 'true',
-           unique: 'false'
-         },
+        // id: {
+        //    type: 'integer',
+        //    autoIncrement: 'true',
+        //    primaryKey: 'true',
+        //    unique: 'false'
+        //  },
 
       }
  };
