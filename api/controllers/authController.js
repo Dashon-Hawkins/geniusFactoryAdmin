@@ -1,9 +1,11 @@
 /**
- * parentController
+ * authController
  *
  * @description :: Server-side logic for managing tutorportalapis
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
+
+ // This controller works on the authorization of the email and password at the initial signup of a parent, student, or tutor.
 
  Emailaddresses = require("machinepack-emailaddresses");
  Passwords = require("machinepack-passwords");

@@ -11,6 +11,10 @@
 
    attributes: {
 
+        parentId: {
+          type: 'integer'
+        },
+
         email: {
            type: 'string',
            required: 'true',

@@ -5,6 +5,7 @@
   "description": "a Sails application",
   "keywords": [],
   "dependencies": {
+    "@backand/angular2-sdk": "^1.2.6",
     "ejs": "2.3.4",
     "grunt": "1.0.1",
     "grunt-contrib-clean": "1.0.0",
@@ -25,7 +26,8 @@
     "node-waf": "^1.0.0",
     "rc": "1.0.1",
     "sails": "~0.12.13",
-    "sails-disk": "~0.10.9"
+    "sails-disk": "~0.10.9",
+    "sails-postgresql": "^0.11.4"
   },
   "scripts": {
     "debug": "node debug app.js",
