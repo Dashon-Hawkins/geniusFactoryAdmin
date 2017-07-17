@@ -6,7 +6,7 @@
  */
 
  module.exports = {
-  create: function createFn(req, res) {
+  Membercreate: function createFn(req, res) {
  	 var body = req.body;
 
  	 body.memberId = req.session.member.id;
