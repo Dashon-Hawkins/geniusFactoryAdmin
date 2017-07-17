@@ -8,11 +8,10 @@
 
 module.exports = {
 
-  module.exports = {
-   Studentcreate: function createFn(req, res) {
+   create: function createFn(req, res) {
   	 var body = req.body;
 
-  	 body.studentId = req.session.student.id;
+  	 body.studentId = req.params.student.id;
   	 return student.create(body)
   		 .then(result => res.json(result))
   		 .catch(error => res.json(500, error));
@@ -28,17 +27,18 @@ module.exports = {
   		 return res.json(400, 'id is required');
   	 }
 
-  	 return student.findOne({ id: id, studentId: req.session.student.id })
+  	 return student.findOne({ id: id, studentId: req.params.student.id })
   		 .then(result => res.json(result))
   		 .catch(error => res.json(500, error));
    },
+
    update: function updateFn(req, res) {
   	 var id = req.param('id');
   	 if (id === undefined) {
   		 return res.json(400, 'id is required');
   	 }
 
-  	 var studentId = req.session.student.id;
+  	 var studentId = req.params.student.id;
   	 var body = req.body;
   	 body.studentId = studentId;
 
@@ -47,15 +47,15 @@ module.exports = {
   		 .catch(error => res.json(500, error));
 
    },
+
    delete: function deleteFn(req, res) {
   	 var id = req.param('id');
   	 if (id === undefined) {
   		 return res.json(400, 'id is required');
   	 }
 
-  	 return student.delete({ id: id , studentId: req.session.student.id })
+  	 return student.delete({ id: id , studentId: req.params.student.id })
   		 .then(result => res.json(result))
   		 .catch(error => res.json(500, error));
    }
-  };
 };

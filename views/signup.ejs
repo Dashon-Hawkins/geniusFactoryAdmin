@@ -96,11 +96,11 @@
         <div class="control-group form-group col-md-12"
           ng-class="{'has-error':signup.title.$invalid &&
                                 signup.title.$dirty}">
-          <label>Your title</label>
-          <input type="text" class="form-control" placeholder="e.g. Genius" name="title" ng-model="signupForm.title" ng-maxlength="50" required>
+          <label>Are you a Parent, Student or do you want to be a Tutor?</label>
+          <input type="text" class="form-control" placeholder="e.g. Parent/Student/Tutor" name="title" ng-model="signupForm.title" ng-maxlength="7" required>
           <span class="help-block has-error" ng-if="signup.title.$dirty">
-            <span ng-show="signup.title.$error.required">Title is required.</span>
-            <span ng-show="signup.title.$error.maxlength">The name cannot be more than 50 characters.</span>
+            <span ng-show="signup.title.$error.required">This is required.</span>
+            <span ng-show="signup.title.$error.maxlength">The entry can only be parent, student or tutor. </span>
           </span>
         </div>
 
@@ -110,7 +110,7 @@
         ng-class="{'has-error':signup.email.$invalid &&
                               signup.email.$dirty}">
           <label>Your email address</label>
-          <input type="email" class="form-control" placeholder="nikola@tesla.com" name="email" ng-model="signupForm.email" required >
+          <input type="email" class="form-control" placeholder="potus44@gmail.com" name="email" ng-model="signupForm.email" required >
           <span class="help-block has-error" ng-if="signup.email.$dirty">
             <span ng-show="signup.email.$error.required">Email address is required.</span>
             <span ng-show="signup.email.$error.email">Not a valid email address.</span>
@@ -124,10 +124,10 @@
                               signup.password.$dirty}">
           <label>Choose a password</label>
           <!-- Added the compareTo directive that compares the passowrds -->
-          <input type="password" class="form-control" placeholder="at least 6 characters" name="password" ng-model="signupForm.password" id="password" required ng-minlength="6" compare-to="signupForm.confirmPassword" >
+          <input type="password" class="form-control" placeholder="at least 8 characters" name="password" ng-model="signupForm.password" id="password" required ng-minlength="8" compare-to="signupForm.confirmPassword" >
           <span class="help-block has-error" ng-if="signup.password.$dirty">
             <span ng-show="signup.password.$error.required">Password is required.</span>
-            <span ng-show="signup.password.$error.minlength">Password must be at least 6 characters.</span>
+            <span ng-show="signup.password.$error.minlength">Password must be at least 8 characters. Any combination of letters, numbers, special characters and case sensitive. Must contain at least two of the following: one number, one Capital letter and/or one special character(!@_3$%&*_+=).</span>
           </span>
         </div>
 
@@ -161,8 +161,9 @@
         <hr>
         <footer class="footer pull-right">
             <div>
+              <a href="http://thegeniusfactory.org/">Genius Factory</a>
+                <div> Copyright Genius Factory © 2017 - Dashon Hawkins Capstone Project © 2017</div>
                 <a href="http://dashonhawkins.com/">dashonhawkins.com</a>
-                <div> Copyright Dashon Hawkins Capstone Project © 2017</div>
             </div>
         </footer>
     </div>

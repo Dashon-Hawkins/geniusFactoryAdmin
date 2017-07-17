@@ -11,25 +11,11 @@
 
    attributes: {
 
-        parentId: {
-          type: 'integer'
-        },
-
-        email: {
-           type: 'string',
-           required: 'true',
-           unique: 'true',
-         },
-
-         encryptedPassword: {
-           type: 'string',
-         },
-
         firstName: {
              type: 'string'
            },
 
-        lastNameInitial: {
+        lastName: {
              type: 'string'
            },
 
@@ -43,6 +29,16 @@
 
         subject: {
              type: 'string'
+           },
+
+        email: {
+             type: 'string',
+             required: 'true',
+             unique: 'true',
+           },
+
+        encryptedPassword: {
+             type: 'string',
            },
 
         // id: {
