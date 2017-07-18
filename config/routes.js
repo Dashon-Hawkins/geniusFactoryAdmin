@@ -36,16 +36,21 @@ module.exports.routes = {
   //   view: 'homepage'
   // }
 
-  'GET /signup': {view: 'signup'}
 
-  /***************************************************************************
-  *                                                                          *
-  * Custom routes here...                                                    *
-  *                                                                          *
-  * If a request to a URL doesn't match any of the custom routes above, it   *
-  * is matched against Sails route blueprints. See `config/blueprints.js`    *
-  * for configuration options and examples.                                  *
-  *                                                                          *
-  ***************************************************************************/
+  ////////////////////////////////////////////////////////////
+  // Server-rendered HTML webpages
+  ////////////////////////////////////////////////////////////
+
+  'GET /signup': {view: 'signup'},
+  // 'GET /': 'pageController.showHomePage'
+
+  ////////////////////////////////////////////////////////////
+  // JSON API
+  ////////////////////////////////////////////////////////////
+
+  // User enrollment + authentication
+  'POST /signup': 'memberController.signup',
+  'PUT /login': 'memberController.login',
+  'GET /logout': 'memberController.logout'
 
 };
