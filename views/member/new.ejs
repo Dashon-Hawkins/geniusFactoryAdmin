@@ -1,0 +1,13 @@
+<h1>Create a new member.. </h1>
+
+<form action="/member" method="post">
+  <input type="text" name="firstName" placeholder="Your First name" >
+
+  <br>
+
+  <input type="text" name="lastName" placeholder="Your Last name" >
+
+  <br>
+  <input type="submit" value="create a new member">
+  <input type="hidden" name="_csrf" value="<%= _csrf %>" >
+</form>

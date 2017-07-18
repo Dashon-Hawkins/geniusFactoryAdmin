@@ -20,28 +20,29 @@
     // e.g. Obama
     lastName: {
       type: 'string',
-      required: true,
+      required: false,
     },
 
     city: {
       type: 'string',
-      required: true,
+      required: false,
     },
 
     state: {
       type: 'string',
-      required: true,
+      required: false,
     },
 
     zipCode: {
       type: 'integer',
-      required: 'true',
+      required: false,
     },
 
     // The user's permission level
     // e.g. Parent/Student/Tutor
     title: {
-      type: 'string'
+      type: 'string',
+      required: false
     },
 
     // The user's email address
@@ -49,7 +50,7 @@
     email: {
       type: 'string',
       email: true,
-      required: true,
+      required: false,
       unique: true
     },
 
@@ -57,7 +58,7 @@
     // e.g. asdgh8a249321e9dhgaslcbqn2913051#T(@GHASDGA
     encryptedPassword: {
       type: 'string',
-      required: true
+      required: false
     },
 
     // url for gravatar
@@ -69,7 +70,7 @@
     // (i.e. sent a username and password to the server)
     lastLoggedIn: {
       type: 'date',
-      required: true,
+      required: false,
       defaultsTo: new Date(0)
     },
 
