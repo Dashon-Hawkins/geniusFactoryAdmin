@@ -9,39 +9,68 @@
 
   attributes: {
 
-    email: {
-      type: 'string',
-      required: 'true',
-      unique: 'true',
-    },
-
-    encryptedPassword: {
-      type: 'string',
-    },
-
+    // The user's first name
+    // e.g. Barak
     firstName: {
       type: 'string',
-      required: 'true',
+      required: true,
     },
 
-    lastNameInitial: {
+    // The user's last name
+    // e.g. Obama
+    lastName: {
       type: 'string',
-      required: 'true',
+      required: true,
     },
 
     city: {
       type: 'string',
-      required: 'true',
+      required: true,
     },
 
     state: {
       type: 'string',
-      required: 'true',
+      required: true,
     },
 
     zipCode: {
       type: 'integer',
       required: 'true',
+    },
+
+    // The user's permission level
+    // e.g. Parent/Student/Tutor
+    title: {
+      type: 'string'
+    },
+
+    // The user's email address
+    // e.g. potus44@whitehouse.gov
+    email: {
+      type: 'string',
+      email: true,
+      required: true,
+      unique: true
+    },
+
+    // The encrypted password for the member
+    // e.g. asdgh8a249321e9dhgaslcbqn2913051#T(@GHASDGA
+    encryptedPassword: {
+      type: 'string',
+      required: true
+    },
+
+    // url for gravatar
+    gravatarUrl: {
+      type: 'string'
+    },
+
+    // The timestamp when the the user last logged in
+    // (i.e. sent a username and password to the server)
+    lastLoggedIn: {
+      type: 'date',
+      required: true,
+      defaultsTo: new Date(0)
     },
 
     toJSON: function () {
