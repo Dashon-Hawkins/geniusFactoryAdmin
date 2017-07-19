@@ -1,0 +1,24 @@
+<h1> Sign Up Here to Become a Genius Factory Member! </h1>
+
+<form action="/member/create" method="POST" class="form-signin">
+	<h2> Create a member account </h2>
+
+	<input type="text" class="input-block-level" placeholder="your first name" name="firstName">
+
+  <input type="text" class="input-block-level" placeholder="your last name" name="lastName">
+
+	<input type="text" class="input-block-level" placeholder="Please type Parent/Student/Tutor" name="title">
+
+  <input type="number" class="input-block-level" placeholder="Your zipcode" name="zipCode">
+
+
+	<input type="text" class="input-block-level" placeholder="valid email address" name="email">
+
+	<input type="password" class="input-block-level" placeholder="Create a password" name="password" id="password">
+
+	<input type="password" class="input-block-level" placeholder="Re-enter password" name="confirmation">
+	<br />
+
+	<input type="submit" class="btn btn-large btn-primary" value="Create member"/>
+	<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+</form>

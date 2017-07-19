@@ -1,0 +1,6 @@
+<h2> Welcome to the members index page: </h2>
+
+<ul>
+  <% member.forEach(function(member)  { %>
+      <li><a href="/member/show/<%= member.id %>"> <%= member.firstName %> </a> : <%= member.lastName %></li>
+  <% }); %>
