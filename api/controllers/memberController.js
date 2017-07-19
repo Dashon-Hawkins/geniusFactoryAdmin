@@ -37,7 +37,7 @@ module.exports = {
       if (err)
         return next(err);
       if (!member)
-        return next();
+        return next('Member doesn\'t exist in our system, please try again.');
       res.view({member: member});
     });
 
@@ -45,7 +45,7 @@ module.exports = {
 
   // Process the info from the edit view
   // Nmuta's version of the update iss first
-  // 
+  //
   // member.update({id: req.params.id}).exec(function afterwards(err, updated){
   //
   //   if (err) {
@@ -63,6 +63,18 @@ module.exports = {
         return res.redirect('/member/edit/' + req.param('id'));
       }
       res.redirect('/member/show/' + req.param('id'));
+    });
+  },
+
+  destroy: function (req, res, next) {
+    member.findOne(req.param('id'), function foundMember (err, member) {
+      if err return next(err);
+      if (!member) return next('Member doesn\'t exist in our system, please try again.');
+      member.destroy(req.param('id'), function memberDestroyed(err) {
+        if (err) return next(err);
+      });
+
+      res.redirect('/member')
     });
   }
 };

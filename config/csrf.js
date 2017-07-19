@@ -44,11 +44,11 @@
 
 /****************************************************************************
 *                                                                           *
-* Enabled CSRF protection for your site?                                    *
-*                                                                           *
+* Enabled CSRF protection for your site?                                    * (Cross-site_request_forgery)                                                *
+*   When starting it is commented out and listed as                         * false                                                                       *
 ****************************************************************************/
 
-// module.exports.csrf = false;
+module.exports.csrf = true;
 
 /****************************************************************************
 *                                                                           *
