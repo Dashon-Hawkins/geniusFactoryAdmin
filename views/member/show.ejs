@@ -1,3 +1,13 @@
-<h1> This is the current member: </h1>
+<h2> This is the current member: </h2>
 
-Member: <%= member.firstName%> | <%= member.lastName %>
+<div class='container'>
+	<h1><%= member.firstName %> </h1>
+  <h1><%= member.lastName %> </h1>
+
+	<h3><%= member.title %> </h3>
+	<hr>
+	<h3>contact: <%- member.email %> </h3>
+
+	<a class="btn btn-medium btn-primary" href="/member/edit/<%= member.id %>">Edit</a>
+
+</div>
