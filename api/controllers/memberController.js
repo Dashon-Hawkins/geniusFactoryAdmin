@@ -8,12 +8,14 @@ module.exports = {
   },
 
   create: function(req, res, next) {
+    // Create a User with the params sent from
+    // the sign-up form --> new.ejs
     member.create(req.params.all(), function memberCreated(err, member) {
-      if (err)
-        return next(err);
+      if (err) return res.serverError(err);
 
       // res.view(member);
       res.redirect('/member');
+      // else return res.json(user); (This is the example from the video.)
 
     })
   },
