@@ -1,16 +1,10 @@
-<h2> Welcome to the members index page: </h2>
-
-<ul>
-  <% member.forEach(function(member)  { %>
-      <li><a href="/member/show/<%= member.id %>"> <%= member.firstName %> </a> : <%= member.lastName %></li>
-  <% }); %>
-
   <div class="container">
-  	<h3>members</h3>
+  	<h3> Current Members: </h3>
   	<table class='table'>
   		<tr>
   			<th>ID</th>
-  			<th>Name</th>
+  			<th>firstName</th>
+        <th>lastName</th>
   			<th>Title</th>
   			<th>Email</th>
   			<th></th>
@@ -22,7 +16,8 @@
   		<% _.each(members, function(member) { %>
   		<tr data-id="<%= member.id %>" data-model="member">
   			<td><%= member.id %></td>
-  			<td><%= member.name %></td>
+  			<td><%= member.firstName %></td>
+        <td><%= member.lastName %></td>
   			<td><%= member.title %></td>
   			<td><%= member.email %></td>
   			<td><a href="/member/show/<%= member.id %>" class="btn btn-sm btn-primary">Show</a></td>
