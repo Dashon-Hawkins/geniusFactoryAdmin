@@ -42,7 +42,7 @@ module.exports.routes = {
   ////////////////////////////////////////////////////////////
 
   'GET /signup': {view: 'signup'},
-  // 'GET /': 'pageController.showHomePage'
+  'GET /': 'pageController.showHomePage',
 
   ////////////////////////////////////////////////////////////
   // JSON API

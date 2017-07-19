@@ -88,7 +88,7 @@ module.exports = {
 
   destroy: function(req, res, next) {
     member.findOne(req.param('id'), function foundMember(err, member) {
-      if err return next(err);
+      if (err) return next(err);
       if (!member)
         return next('Member doesn\'t exist in our system, please try again.');
       member.destroy(req.param('id'), function memberDestroyed(err) {
