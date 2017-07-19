@@ -12,23 +12,33 @@ module.exports = {
     // Create a ("C"RUD RESTful API) member with the params sent from the sign-up form --> views/member/new.ejs
 
     member.create(req.params.all(), function memberCreated(err, member) {
-      if (err) return res.serverError(err);
+      if (err)
+        return res.serverError(err);
+      //   req.session.flash = {
+      //     err: err
+      //   };
+      //   return res.redirect('/member/new');
+      // }
 
       // res.view(member);
+
       res.redirect('/member');
-      // else return res.json(user); (This is the example from the video.)
+
+      // else return res.json(user); <<< This is the example from the video.
+      // req.session.flash = {};  <<<Create a flash message and inject it into the sign-up page in /views/user/UserController.js we store the error in the request session object, which will be persistent across web pages (and clear it in the case of a success)
 
     })
   },
 
   // After member is created this allows to read (c"R"ud RESTful API) the member created and find all of the members.
+
   index: function(req, res) {
     member.find().exec(function(err, member) {
       res.view({member: member});
     });
   },
 
-// Allowes you to find one of the members by id and lets you view the record (C"R"UD RESTful API)
+  // Allowes you to find one of the members by id and lets you view the record (C"R"UD RESTful API)
 
   show: function(req, res) {
     member.findOne({id: req.params.id}).exec(function(err, member) {
@@ -63,8 +73,8 @@ module.exports = {
   //   console.log('Updated user to have name ' + updated[0].name);
   // });
 
+  // Update the info within the member view (e.g. /member.edit) redirect and reflect changes in show.ejs (CR"U"D RESTful API)
 
-// Update the info within the member view (e.g. /member.edit) redirect and reflect changes in show.ejs (CR"U"D RESTful API)
   update: function(req, res, next) {
     member.update(req.params['id'], req.params.all(), function memberUpdated(err) {
       if (err) {
@@ -74,15 +84,18 @@ module.exports = {
     });
   },
 
+  // Find a member by id and if exists delete (destroy) a member and redirect to /member (CRU"D" RESTful API)
 
-// Find a member by id and if exists delete (destroy) a member and redirect to /member (CRU"D" RESTful API)
-  destroy: function (req, res, next) {
-    member.findOne(req.param('id'), function foundMember (err, member) {
+  destroy: function(req, res, next) {
+    member.findOne(req.param('id'), function foundMember(err, member) {
       if err return next(err);
-      if (!member) return next('Member doesn\'t exist in our system, please try again.');
+      if (!member)
+        return next('Member doesn\'t exist in our system, please try again.');
       member.destroy(req.param('id'), function memberDestroyed(err) {
-        if (err) return next(err);
-      });
+        if (err)
+          return next(err);
+        }
+      );
 
       res.redirect('/member')
     });

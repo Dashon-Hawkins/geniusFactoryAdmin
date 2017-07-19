@@ -5,7 +5,9 @@
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
- module.exports = {
+module.exports = {
+
+  schema: true,
 
   attributes: {
 
@@ -13,29 +15,29 @@
     // e.g. Barak
     firstName: {
       type: 'string',
-      required: true,
+      required: true
     },
 
     // The user's last name
     // e.g. Obama
     lastName: {
       type: 'string',
-      required: false,
+      required: false
     },
 
     city: {
       type: 'string',
-      required: false,
+      required: false
     },
 
     state: {
       type: 'string',
-      required: false,
+      required: false
     },
 
     zipCode: {
       type: 'integer',
-      required: false,
+      required: false
     },
 
     // The user's permission level
@@ -74,7 +76,7 @@
       defaultsTo: new Date(0)
     },
 
-    toJSON: function () {
+    toJSON: function() {
       var obj = this.toObject();
       delete obj.password;
       delete obj.confirmation;
