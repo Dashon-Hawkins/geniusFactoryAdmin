@@ -56,22 +56,22 @@
 
   /**
  * Check the provided email address and password, and if they
- * match a real user in the postgreSQL database, sign in to Genius Factory Members Portal.
+ * match a real member in the postgreSQL database, sign in to Genius Factory Members Portal.
  */
 login: function (req, res) {
 
-  // Try to look up user using the provided email address
-  User.findOne({
+  // Try to look up member using the provided email address
+  member.findOne({
     email: req.param('email')
-  }, function foundUser(err, user) {
+  }, function foundMember(err, member) {
     if (err) return res.negotiate(err);
-    if (!user) return res.notFound();
+    if (!member) return res.notFound();
 
     // Compare password attempt from the form params to the encrypted password
-    // from the database (`user.password`)
+    // from the database (`member.password`)
     require('machinepack-passwords').checkPassword({
       passwordAttempt: req.param('password'),
-      encryptedPassword: user.encryptedPassword
+      encryptedPassword: member.encryptedPassword
     }).exec({
 
       error: function (err){
@@ -86,8 +86,8 @@ login: function (req, res) {
 
       success: function (){
 
-        // Store user id in the user session
-        req.session.me = user.id;
+        // Store member id in the member session
+        req.session.me = member.id;
 
         // All done- let the client know that everything worked.
         return res.ok();
@@ -98,7 +98,7 @@ login: function (req, res) {
 },
 
 /**
- * Sign up for a user account.
+ * Sign up for a member account.
  */
 signup: function(req, res) {
 
@@ -122,9 +122,9 @@ signup: function(req, res) {
           return res.negotiate(err);
         },
         success: function(gravatarUrl) {
-        // Create a User with the params sent from
+        // Create a member with the params sent from
         // the sign-up form --> signup.ejs
-          User.create({
+          member.create({
             firstName: req.param('firstName'),
             lastName: req.param('lastName'),
             age: req.params('age'),
@@ -136,7 +136,7 @@ signup: function(req, res) {
             encryptedPassword: encryptedPassword,
             lastLoggedIn: new Date(),
             gravatarUrl: gravatarUrl
-          }, function userCreated(err, newUser) {
+          }, function memberCreated(err, newMember) {
             if (err) {
 
               console.log("err: ", err);
@@ -153,12 +153,12 @@ signup: function(req, res) {
               return res.negotiate(err);
             }
 
-            // Log user in
-            req.session.me = newUser.id;
+            // Log member in
+            req.session.me = newMember.id;
 
-            // Send back the id of the new user
+            // Send back the id of the new member
             return res.json({
-              id: newUser.id
+              id: newMember.id
             });
           });
         }
@@ -168,19 +168,19 @@ signup: function(req, res) {
 },
 
 /**
- * Log out of Genius Factory members portal.
+ * Log out of Genius Factory Members portal.
  * (wipes `me` from the sesion)
  */
 logout: function (req, res) {
 
-  // Look up the user record from the postgreSQL database which is
-  // referenced by the id in the user session (req.session.me)
-  User.findOne(req.session.me, function foundUser(err, user) {
+  // Look up the member record from the postgreSQL database which is
+  // referenced by the id in the member session (req.session.me)
+  member.findOne(req.session.me, function foundMember(err, member) {
     if (err) return res.negotiate(err);
 
-    // If session refers to a user who no longer exists, still allow logout.
-    if (!user) {
-      sails.log.verbose('This session refers to a user who no longer exists.');
+    // If session refers to a member who no longer exists, still allow logout.
+    if (!member) {
+      sails.log.verbose('This session refers to a member who no longer exists.');
       return res.backToHomePage();
     }
 

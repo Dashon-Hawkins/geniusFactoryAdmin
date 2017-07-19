@@ -1,6 +1,6 @@
-<h2> Welcome to the members index page: </h2>
+<h2> Welcome to the tutors index page: </h2>
 
 <ul>
-  <% member.forEach(function(member)  { %>
-      <li><a href="/member/show/<%= member.id %>"> <%= member.firstName %> </a> : <%= member.lastName %></li>
+  <% tutor.forEach(function(tutor)  { %>
+      <li><a href="/tutor/show/<%= tutor.id %>"> <%= tutor.firstName %> </a> : <%= tutor.lastName %></li>
   <% }); %>
