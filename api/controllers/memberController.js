@@ -8,8 +8,9 @@ module.exports = {
   },
 
   create: function(req, res, next) {
-    // Create a User with the params sent from
-    // the sign-up form --> new.ejs
+
+    // Create a ("C"RUD RESTful API) member with the params sent from the sign-up form --> views/member/new.ejs
+
     member.create(req.params.all(), function memberCreated(err, member) {
       if (err) return res.serverError(err);
 
@@ -20,11 +21,14 @@ module.exports = {
     })
   },
 
+  // After member is created this allows to read (c"R"ud RESTful API) the member created and find all of the members.
   index: function(req, res) {
     member.find().exec(function(err, member) {
       res.view({member: member});
     });
   },
+
+// Allowes you to find one of the members by id and lets you view the record (C"R"UD RESTful API)
 
   show: function(req, res) {
     member.findOne({id: req.params.id}).exec(function(err, member) {
@@ -32,7 +36,8 @@ module.exports = {
     });
   },
 
-  // Render the edit view (e.g. /views/edit.ejs)
+  // Render the edit view (e.g. /views/edit.ejs) if member is found by id else gives an error message.
+
   edit: function(req, res, next) {
     // Find the member from the id passed via params
     member.findOne(req.params['id'], function foundMember(err, member) {
@@ -46,7 +51,7 @@ module.exports = {
   },
 
   // Process the info from the edit view
-  // Nmuta's version of the update iss first
+  // Nmuta's version of the update is first
   //
   // member.update({id: req.params.id}).exec(function afterwards(err, updated){
   //
@@ -59,6 +64,7 @@ module.exports = {
   // });
 
 
+// Update the info within the member view (e.g. /member.edit) redirect and reflect changes in show.ejs (CR"U"D RESTful API)
   update: function(req, res, next) {
     member.update(req.params['id'], req.params.all(), function memberUpdated(err) {
       if (err) {
@@ -68,6 +74,8 @@ module.exports = {
     });
   },
 
+
+// Find a member by id and if exists delete (destroy) a member and redirect to /member (CRU"D" RESTful API)
   destroy: function (req, res, next) {
     member.findOne(req.param('id'), function foundMember (err, member) {
       if err return next(err);
