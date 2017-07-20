@@ -61,7 +61,7 @@
                 <span ng-show="loginForm.loading" class="fa fa-spinner"></span>
                 <span ng-show="loginForm.loading">Signing up...</span>
               </button>
-              <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+              <!-- <input type="hidden" name="_csrf" value="<%= _csrf %>" /> -->
           </form>
         </nav>
       </div>
@@ -80,10 +80,17 @@
         <div class="control-group form-group col-md-12"
         ng-class="{'has-error':signup.name.$invalid &&
                               signup.name.$dirty}">
-          <label>Your full name</label>
+
+          <label>Your First name</label>
 
           <!-- For this input field make it required, and have a max length of 25 -->
-          <input type="text" class="form-control" placeholder="e.g. Barak Obama" name="name" ng-model="signupForm.name" ng-maxlength="50" required>
+          <input type="text" class="form-control" placeholder="e.g. Barak" name="firstName" ng-model="signupForm.firstName" ng-maxlength="20" required>
+
+          <label>Your Last name</label>
+
+          <!-- For this input field make it required, and have a max length of 25 -->
+          <input type="text" class="form-control" placeholder="e.g. Obama" name="lastName" ng-model="signupForm.lastName" ng-maxlength="20" required>
+
 
           <!-- Also, if signup.name.$dirty is true, show the message depending upon the particular properties truthiness (e.g. required
           and/or maxlength) -->
@@ -99,18 +106,18 @@
           ng-class="{'has-error':signup.title.$invalid &&
                                 signup.title.$dirty}">
           <label>Are you a Parent, Student or do you want to be a Tutor?</label>
-          <div class="dropdown">
+          <!-- <div class="dropdown">
         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             Subject
-            <span class="caret">span>
-        button>
+            <span class="caret">
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
               <li><a href="#">Parent</a></li>
               <li><a href="#">Student</a></li>
               <li><a href="#">Tutor</a></li>
             </ul>
-          </div>
-          <!-- <input type="text" class="form-control" placeholder="e.g. Parent/Student/Tutor" name="title" ng-model="signupForm.title" ng-maxlength="7" required> -->
+          </div> -->
+
+          <input type="text" class="form-control" placeholder="e.g. Parent/Student/Tutor" name="title" ng-model="signupForm.title" ng-maxlength="7" required>
           <span class="help-block has-error" ng-if="signup.title.$dirty">
             <span ng-show="signup.title.$error.required">This is required.</span>
             <span ng-show="signup.title.$error.maxlength">The entry can only be parent, student or tutor. </span>

@@ -34,6 +34,17 @@ module.exports = {
     })
   },
 
+  "signup": function(req, res, next) {
+
+    member.create(req.params.all(), function memberCreated(err, member) {
+      if (err)
+        return res.serverError(err);
+
+      res.redirect('/member');
+
+    })
+  },
+
   // After member is created this allows to read (c"R"ud RESTful API) the member created and find all of the members.
 
   index: function(req, res) {

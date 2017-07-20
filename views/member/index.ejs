@@ -15,9 +15,9 @@
   		<% _.each(member, function(member) { %>
   		<tr data-id="<%= member.id %>" data-model="member">
         <% if (member.online) { %>
-      <td><img src="/images/icon-online.png"></td>
+      <td><img src="/images/icon-online.png" height="50px"></td>
     <% } else { %>
-      <td> <img src="/images/icon-offline.png"></td>
+      <td> <img src="/images/icon-offline.png" height="50px"></td>
     <% } %>
   			<td><%= member.id %></td>
   			<td><%= member.firstName %></td>
@@ -26,9 +26,9 @@
   			<td><%= member.email %></td>
         <td><%= member.zipCode %></td>
           <% if (member.admin) { %>
-            <td> <img src="/images/admin.png"></td>
+            <td> <img src="/images/admin.png" height="50px"></td>
             <% } else { %>
-              <td> <img src="/images/pawn.png"></td>
+              <td> <img src="/images/pawn.png" height="50px"></td>
               <% } %>
   			<td><a href="/member/show/<%= member.id %>" class="btn btn-sm btn-primary">Show</a></td>
   			<td><a href="/member/edit/<%= member.id %>" class="btn btn-sm btn-warning">Edit</a></td>

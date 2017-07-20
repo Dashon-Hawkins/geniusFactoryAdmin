@@ -48,7 +48,7 @@
 *   When starting it is commented out and listed as                         * false                                                                       *
 ****************************************************************************/
 
-module.exports.csrf = true;
+module.exports.csrf = false;
 
 /****************************************************************************
 *                                                                           *

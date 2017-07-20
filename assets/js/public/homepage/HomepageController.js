@@ -5,6 +5,10 @@ angular.module('HomepageModule').controller('HomepageController', ['$scope', '$h
 		loading: true
 	}
 
+	//  $scope.proceedToSignUp = function(){
+	// 	 window.location = '/signup';
+	//  }
+
 	$scope.submitLoginForm = function (){
 
     // Set the loading state (i.e. show loading spinner)
