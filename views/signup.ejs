@@ -22,7 +22,6 @@
 
   <body ng-app="SignupModule" ng-controller="SignupController" ng-cloak>
     <div class="container-fluid">
-      <img ng-src="/images/geniusFactoryLogo.jpg">
     </div>
     <div class="container-fluid">
 
@@ -39,6 +38,7 @@
           </button>
 
           <!-- This is the brand on the left-hand side. -->
+          <img ng-src="/images/geniusFactoryLogo.jpg">
           <a class="navbar-brand" href="http://www.thegeniusfactory.org"> Welcome to the Genius Factory! </a>
           <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
 
@@ -99,12 +99,41 @@
           ng-class="{'has-error':signup.title.$invalid &&
                                 signup.title.$dirty}">
           <label>Are you a Parent, Student or do you want to be a Tutor?</label>
-          <input type="text" class="form-control" placeholder="e.g. Parent/Student/Tutor" name="title" ng-model="signupForm.title" ng-maxlength="7" required>
+          <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Subject
+            <span class="caret">span>
+        button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li><a href="#">Parent</a></li>
+              <li><a href="#">Student</a></li>
+              <li><a href="#">Tutor</a></li>
+            </ul>
+          </div>
+          <!-- <input type="text" class="form-control" placeholder="e.g. Parent/Student/Tutor" name="title" ng-model="signupForm.title" ng-maxlength="7" required> -->
           <span class="help-block has-error" ng-if="signup.title.$dirty">
             <span ng-show="signup.title.$error.required">This is required.</span>
             <span ng-show="signup.title.$error.maxlength">The entry can only be parent, student or tutor. </span>
           </span>
         </div>
+
+        <!-- Drop Down Menu for title -->
+
+        <div class="dropdown-container" ng-class="{ show: listVisible }">
+	<div class="dropdown-display" ng-click="show();" ng-class="{ clicked: listVisible }">
+		<span ng-if="!isPlaceholder">{{display}}</span>
+		<span class="placeholder" ng-if="isPlaceholder">{{placeholder}}lt;/span>
+		<i class="fa fa-angle-down"></i>
+	</div>
+	<div class="dropdown-list">
+		<div>
+			<div ng-repeat="item in list" ng-click="select(item)" ng-class="{ selected: isSelected(item) }">
+				<span>{{property !== undefined ? item[property] : item}}</span>
+				<i class="fa fa-check"></i>
+			</div>
+		</div>
+	</div>
+</div>
 
         <!-- E M A I L -->
 
@@ -182,6 +211,7 @@
     <script src="/js/private/dashboard/DashboardController.js"></script>
     <script src="/js/public/homepage/HomepageModule.js"></script>
     <script src="/js/public/homepage/HomepageController.js"></script>
+
     <!--SCRIPTS END-->
   </body>
 </html>

@@ -2,7 +2,7 @@ angular.module('HomepageModule').controller('HomepageController', ['$scope', '$h
 
 	// set-up loginForm loading state
 	$scope.loginForm = {
-		loading: false
+		loading: true
 	}
 
 	$scope.submitLoginForm = function (){

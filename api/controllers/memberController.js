@@ -24,8 +24,12 @@ module.exports = {
 
       res.redirect('/member');
 
-      // else return res.json(user); <<< This is the example from the video.
-      // req.session.flash = {};  <<<Create a flash message and inject it into the sign-up page in /views/user/UserController.js we store the error in the request session object, which will be persistent across web pages (and clear it in the case of a success)
+// <<< This is the example from the video.
+      // <<<Create a flash message and inject it into the sign-up page in /views/member/memberController.js we store the error in the request session object, which will be persistent across web pages (and clear it in the case of a success)
+
+      // else return res.json(member);
+      // req.session.flash = {};
+
 
     })
   },
@@ -97,7 +101,7 @@ module.exports = {
         }
       );
 
-      res.redirect('/member')
+      res.redirect('/homepage')
     });
   }
 };

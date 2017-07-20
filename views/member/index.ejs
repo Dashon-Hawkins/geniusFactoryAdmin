@@ -1,5 +1,5 @@
   <div class="container">
-  	<h3> Current Members: </h3>
+  	<h3> Members </h3>
   	<table class='table'>
   		<tr>
   			<th>ID</th>
@@ -7,27 +7,38 @@
         <th>lastName</th>
   			<th>Title</th>
   			<th>Email</th>
-  			<th></th>
+  			<th>zipCode</th>
   			<th></th>
   			<th></th>
   		</tr>
 
-
-  		<% _.each(members, function(member) { %>
+  		<% _.each(member, function(member) { %>
   		<tr data-id="<%= member.id %>" data-model="member">
+        <% if (member.online) { %>
+      <td><img src="/images/icon-online.png"></td>
+    <% } else { %>
+      <td> <img src="/images/icon-offline.png"></td>
+    <% } %>
   			<td><%= member.id %></td>
   			<td><%= member.firstName %></td>
         <td><%= member.lastName %></td>
   			<td><%= member.title %></td>
   			<td><%= member.email %></td>
+        <td><%= member.zipCode %></td>
+          <% if (member.admin) { %>
+            <td> <img src="/images/admin.png"></td>
+            <% } else { %>
+              <td> <img src="/images/pawn.png"></td>
+              <% } %>
   			<td><a href="/member/show/<%= member.id %>" class="btn btn-sm btn-primary">Show</a></td>
   			<td><a href="/member/edit/<%= member.id %>" class="btn btn-sm btn-warning">Edit</a></td>
   			<td><form action="/member/destroy/<%= member.id %>" method="POST">
   				<input type="hidden" name="_method" value="delete"/>
-  				<input type="submit" class="btn btn-sm btn-danger" value="Delete"/>
+  				<input type="submit" class="btn btn-sm btn-danger" value="Delete"/>Delete
   				<input type="hidden" name="_csrf" value="<%= _csrf %>" />
-  			</form>
+  			</form></td>
       </tr>
+
   		<% }) %>
   	</table>
   </div>

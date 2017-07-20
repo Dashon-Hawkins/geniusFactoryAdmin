@@ -31,11 +31,7 @@ module.exports.routes = {
   * `assets` directory)                                                      *
   *                                                                          *
   ***************************************************************************/
-
-  // '/': {
-  //   view: 'homepage'
-  // }
-
+  //
 
   ////////////////////////////////////////////////////////////
   // Server-rendered HTML webpages
@@ -53,4 +49,8 @@ module.exports.routes = {
   'PUT /login': 'memberController.login',
   'GET /logout': 'memberController.logout'
 
+  // '/': {
+  //   view: 'homepage'
+  // },
+  //
 };
