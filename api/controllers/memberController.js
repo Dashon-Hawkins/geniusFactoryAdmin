@@ -40,7 +40,7 @@ module.exports = {
       if (err)
         return res.serverError(err);
 
-      res.redirect('/member');
+      res.redirect('/dashboard');
 
     })
   },
@@ -112,7 +112,7 @@ module.exports = {
         }
       );
 
-      res.redirect('/homepage')
+      res.redirect('/')
     });
   }
 };
