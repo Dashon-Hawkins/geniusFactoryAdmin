@@ -1,118 +1,195 @@
-module.exports = {
-  "new": function(req, res) {
-    res.view();
-  },
+/**
+ * memberController
+ *
+ * @description :: Server-side logic for managing membercontrollers
+ * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
+ */
 
-  "/": function(req, res) {
-    res.view();
-  },
+ module.exports = {
+  /**
+ * Check the provided email address and password, and if they
+ * match a real member in the postgreSQL database, sign in to Genius Factory Members Portal.
+ */
 
-  create: function(req, res, next) {
+login: function (req, res) {
 
-    // Create a ("C"RUD RESTful API) member with the params sent from the sign-up form --> views/member/new.ejs
+  // Try to look up member using the provided email address
+  member.findOne({
+    email: req.param('email')
+  }, function foundMember(err, member) {
+    if (err) return res.negotiate(err);
+    if (!member) return res.notFound();
 
-    member.create(req.params.all(), function memberCreated(err, member) {
-      if (err)
-        return res.serverError(err);
-      //   req.session.flash = {
-      //     err: err
-      //   };
-      //   return res.redirect('/member/new');
-      // }
+    // Compare password attempt from the form params to the encrypted password
+    // from the database (`member.password`)
+    require('machinepack-passwords').checkPassword({
+      passwordAttempt: req.param('password'),
+      encryptedPassword: member.encryptedPassword
+    }).exec({
 
-      // res.view(member);
+      error: function (err) {
+        return res.negotiate(err);
+      },
 
-      res.redirect('/member');
+      // If the password from the form params doesn't checkout w/ the encrypted
+      // password from the database...
+      incorrect: function () {
+        return res.notFound();
+      },
 
-// <<< This is the example from the video.
-      // <<<Create a flash message and inject it into the sign-up page in /views/member/memberController.js we store the error in the request session object, which will be persistent across web pages (and clear it in the case of a success)
+      success: function () {
 
-      // else return res.json(member);
-      // req.session.flash = {};
+        // Store member id in the member session
+        req.session.me = member.id;
 
-
-    })
-  },
-
-  "signup": function(req, res, next) {
-
-    member.create(req.params.all(), function memberCreated(err, member) {
-      if (err)
-        return res.serverError(err);
-
-      res.redirect('/dashboard');
-
-    })
-  },
-
-  // After member is created this allows to read (c"R"ud RESTful API) the member created and find all of the members.
-
-  index: function(req, res) {
-    member.find().exec(function(err, member) {
-      res.view({member: member});
-    });
-  },
-
-  // Allowes you to find one of the members by id and lets you view the record (C"R"UD RESTful API)
-
-  show: function(req, res) {
-    member.findOne({id: req.params.id}).exec(function(err, member) {
-      res.view({member: member});
-    });
-  },
-
-  // Render the edit view (e.g. /views/edit.ejs) if member is found by id else gives an error message.
-
-  edit: function(req, res, next) {
-    // Find the member from the id passed via params
-    member.findOne(req.params['id'], function foundMember(err, member) {
-      if (err)
-        return next(err);
-      if (!member)
-        return next('Member doesn\'t exist in our system, please try again.');
-      res.view({member: member});
-    });
-
-  },
-
-  // Process the info from the edit view
-  // Nmuta's version of the update is first
-  //
-  // member.update({id: req.params.id}).exec(function afterwards(err, updated){
-  //
-  //   if (err) {
-  //     // handle error here- e.g. `res.serverError(err);`
-  //     return;
-  //   }
-  //
-  //   console.log('Updated user to have name ' + updated[0].name);
-  // });
-
-  // Update the info within the member view (e.g. /member.edit) redirect and reflect changes in show.ejs (CR"U"D RESTful API)
-
-  update: function(req, res, next) {
-    member.update(req.params['id'], req.params.all(), function memberUpdated(err) {
-      if (err) {
-        return res.redirect('/member/edit/' + req.param('id'));
+        // All done- let the client know that everything worked.
+        return res.ok();
       }
-      res.redirect('/member/show/' + req.param('id'));
     });
-  },
+  });
 
-  // Find a member by id and if exists delete (destroy) a member and redirect to /member (CRU"D" RESTful API)
+},
 
-  destroy: function(req, res, next) {
-    member.findOne(req.param('id'), function foundMember(err, member) {
-      if (err) return next(err);
-      if (!member)
-        return next('Member doesn\'t exist in our system, please try again.');
-      member.destroy(req.param('id'), function memberDestroyed(err) {
-        if (err)
-          return next(err);
+/**
+ * Sign up for a member account.
+ */
+signup: function(req, res) {
+
+  var Passwords = require('machinepack-passwords');
+
+  // Encrypt a string using the BCrypt algorithm.
+  Passwords.encryptPassword({
+    password: req.param('password'),
+    difficulty: 10,
+  }).exec({
+    // An unexpected error occurred.
+    error: function(err) {
+      return res.negotiate(err);
+    },
+    // OK.
+    success: function(encryptedPassword) {
+      require('machinepack-gravatar').getImageUrl({
+        emailAddress: req.param('email')
+      }).exec({
+        error: function(err) {
+          return res.negotiate(err);
+        },
+        success: function(gravatarUrl) {
+        // Create a member with the params sent from
+        // the sign-up form --> signup.ejs
+          member.create({
+            firstName: req.param('firstName'),
+            lastName: req.param('lastName'),
+            title: req.param('title'),
+            email: req.param('email'),
+            encryptedPassword: encryptedPassword,
+            lastLoggedIn: new Date(),
+            gravatarUrl: gravatarUrl
+          }, function memberCreated(err, newMember) {
+            if (err) {
+
+              console.log("err: ", err);
+              console.log("err.invalidAttributes: ", err.invalidAttributes)
+
+              // If this is a uniqueness error about the email attribute,
+              // send back an easily parseable status code.
+              if (err.invalidAttributes && err.invalidAttributes.email && err.invalidAttributes.email[0]
+                && err.invalidAttributes.email[0].rule === 'unique') {
+                return res.emailAddressInUse();
+              }
+
+              // Otherwise, send back something reasonable as our error response.
+              return res.negotiate(err);
+            }
+
+            // Log member in
+            req.session.me = newMember.id;
+
+            // Send back the id of the new member
+            return res.json({
+              id: newMember.id
+            });
+          });
         }
-      );
+      });
+    }
+  });
+},
 
-      res.redirect('/')
-    });
-  }
-};
+/**
+ * Log out of Genius Factory Members portal.
+ * (wipes `me` from the sesion)
+ */
+logout: function (req, res) {
+
+  // Look up the member record from the postgreSQL database which is
+  // referenced by the id in the member session (req.session.me)
+  member.findOne(req.session.me, function foundMember(err, member) {
+    if (err) return res.negotiate(err);
+
+    // If session refers to a member who no longer exists, still allow logout.
+    if (!member) {
+      sails.log.verbose('This session refers to a member who no longer exists.');
+      return res.backToHomePage();
+    }
+
+    // Wipe out the session (log out)
+    req.session.me = null;
+
+    // Either send a 200 OK or redirect to the home page
+    return res.backToHomePage();
+
+  });
+}
+
+ };
+
+ //  This is CRUD example using ES6 that I got from Justin
+
+ // create: function createFn(req, res) {
+ // 	 var body = req.body;
+ //
+ // 	 return member.create()
+ // 		 .then(result => res.json(result))
+ // 		 .catch(error => res.json(500, error));
+ // },
+ // find: function findFn(req, res) {
+ // 	 return member.find({ memberId: req.params.id})
+ // 		 .then(result => res.json(result))
+ // 		 .catch(error => res.json(500, error));
+ // },
+ // findOne: function findOneFn(req, res) {
+ // 	 var id = req.param('id');
+ // 	 if (id === undefined) {
+ // 		 return res.json(400, 'id is required');
+ // 	 }
+ //
+ // 	 return member.findOne({ id: id, memberId: req.params.member.id })
+ // 		 .then(result => res.json(result))
+ // 		 .catch(error => res.json(500, error));
+ // },
+ // update: function updateFn(req, res) {
+ // 	 var id = req.param('id');
+ // 	 if (id === undefined) {
+ // 		 return res.json(400, 'id is required');
+ // 	 }
+ //
+ // 	 var memberId = req.aprams.member.id;
+ // 	 var body = req.body;
+ // 	 body.memberId = memberId;
+ //
+ // 	 return member.update({ id: id , memberId: memberId }, body)
+ // 		 .then(result => res.json(result))
+ // 		 .catch(error => res.json(500, error));
+ //
+ // },
+ // delete: function deleteFn(req, res) {
+ // 	 var id = req.param('id');
+ // 	 if (id === undefined) {
+ // 		 return res.json(400, 'id is required');
+ // 	 }
+ //
+ // 	 return member.delete({ id: id , memberId: req.session.member.id })
+ // 		 .then(result => res.json(result))
+ // 		 .catch(error => res.json(500, error));
+ // },

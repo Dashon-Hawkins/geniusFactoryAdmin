@@ -1,4 +1,4 @@
-angular.module('SignupModule').controller('SignupController', ['$scope', '$http', 'toastr', function($scope, $http, toastr){
+angular.module('SignupModule').controller('SignupController', ['$scope', '$http', 'toastr', 'mgcrea.ngStrap', 'mgcrea.ngStrap.modal', 'mgcrea.ngStrap.aside', 'mgcrea.ngStrap.tooltip' function($scope, $http, toastr, mgcrea.ngStrap, mgcrea.ngStrap.modal, mgcrea.ngStrap.aside, mgcrea.ngStrap.tooltip) {
 
 	// set-up loading state
 	$scope.signupForm = {
@@ -8,7 +8,9 @@ angular.module('SignupModule').controller('SignupController', ['$scope', '$http'
 	$scope.submitSignupForm = function(){
 
 		// Set the loading state (i.e. show loading spinner)
-		$scope.signupForm.loading = true;
+		$scope.signupForm.loading = false;
+
+		// console.log("I heard ya!");
 
 		// Submit request to Sails.
 		$http.post('/signup', {
@@ -19,7 +21,7 @@ angular.module('SignupModule').controller('SignupController', ['$scope', '$http'
 			password: $scope.signupForm.password
 		})
 		.then(function onSuccess(sailsResponse){
-			window.location = '/';
+			window.location = '/dashboard/';
 		})
 		.catch(function onError(sailsResponse){
 

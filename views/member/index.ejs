@@ -16,7 +16,7 @@
   <meta charset="UTF-8" />
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="pingback" href="http://thegeniusfactory.org/xmlrpc.php" />
+  <link rel="pingback" href="http://thegeniusfactory.org" />
 
   <!--[if lt IE 9]>
 	<script src="http://thegeniusfactory.org/wp-content/themes/Divi/js/html5.js" type="text/javascript"></script>
@@ -26,7 +26,7 @@
     document.documentElement.className = 'js';
   </script>
 
-  <title>Find tutors in the greater Phoenix, AZ area</title>
+  <title>Genius Factory Member's List</title>
 
   <!-- Viewport mobile tag for sensible mobile support -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -61,36 +61,64 @@
 
 </head>
 
-<header data-height-onload="100">
-  <!-- <div class="container clearfix et_menu_container"> -->
-    <div class="logo_container">
-      <span class="logo_helper"></span>
-      <a href="http://thegeniusfactory.org/">
-    <img src="http://thegeniusfactory.org/wp-content/uploads/2017/03/gf-logo_horizontal-long-larger.jpg" alt="GeniusFactory" id="logo" data-height-percentage="45" />
-  </a>
-</div>
+
+    <header data-height-onload="100">
+      <!-- <div class="container clearfix et_menu_container"> -->
+        <div class="logo_container">
+          <span class="logo_helper"></span>
+          <a href="http://thegeniusfactory.org/">
+        <img src="http://thegeniusfactory.org/wp-content/uploads/2017/03/gf-logo_horizontal-long-larger.jpg" alt="GeniusFactory" id="logo" data-height-percentage="45" />
+      </a>
+    </div>
+        <div data-height="100" data-fixed-height="67">
+          <nav id="top-menu-nav">
+            <!-- <ul id="top-menu" class="nav"> -->
+            <!-- </ul> -->
+          </nav>
+
+          <!-- Creates the navbar -->
+          <nav class="navbar navbar-default navbar-inverse">
+            <!-- This creates the mechanism for collapse button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
+            <!-- This controls the number of lines in the image when the nav collapse -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+            <!-- This is the brand on the left-hand side. -->
+            <a class="navbar-brand" href="/images/geniusFactoryLogo.jpg"> Genius Factory Portal </a>
+            <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
+              <div class="navbar-form navbar-right">
+                  <div class="clickToCall">
+                    <a href="tel:+14802470223">(480) 247-0223</a>
+                  </div>
+              </div>
+          </nav>
+          </div>
 
   <div class="container">
   	<h3> Members </h3>
-  	<table class='table'>
+  	<table class='table' id="membersListTable">
   		<tr>
+        <th>Member Online</th>
   			<th>ID</th>
   			<th>firstName</th>
         <th>lastName</th>
   			<th>Title</th>
   			<th>Email</th>
   			<th>zipCode</th>
-  			<th></th>
-  			<th></th>
+  			<th>Admin</th>
   		</tr>
 
   		<% _.each(member, function(member) { %>
   		<tr data-id="<%= member.id %>" data-model="member">
         <% if (member.online) { %>
-      <td><img src="/images/icon-online.png" height="50px"></td>
+      <td><img src="/images/icon-online.png" class="online-img"></td>
     <% } else { %>
-      <td> <img src="/images/icon-offline.png" height="50px"></td>
+      <td> <img src="/images/icon-offline.png" class="offline-img"></td>
     <% } %>
+
   			<td><%= member.id %></td>
   			<td><%= member.firstName %></td>
         <td><%= member.lastName %></td>
@@ -98,9 +126,9 @@
   			<td><%= member.email %></td>
         <td><%= member.zipCode %></td>
           <% if (member.admin) { %>
-            <td> <img src="/images/admin.png" height="50px"></td>
+            <td> <img src="/images/admin.png" class="admin-img"></td>
             <% } else { %>
-              <td> <img src="/images/pawn.png" height="50px"></td>
+              <td> <img src="/images/pawn.png" class="member-img"></td>
               <% } %>
   			<td><a href="/member/show/<%= member.id %>" class="btn btn-sm btn-primary">Show</a></td>
   			<td><a href="/member/edit/<%= member.id %>" class="btn btn-sm btn-warning">Edit</a></td>

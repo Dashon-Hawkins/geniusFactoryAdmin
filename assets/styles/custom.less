@@ -61,6 +61,8 @@ margin-right: 2px;
     cursor: pointer;
 }
 
+
+// Sign up page button
 .button-hot-fix{
     z-index: 200;
     align-self: center;
@@ -68,14 +70,156 @@ margin-right: 2px;
     margin: 0px;
 }
 
+
+// Nav bar Genius Factory phone number
 .clickToCall {
   font-size: 20px;
   text-align: right;
 }
 
+// Genius Factpry Footer
 
 .myFooter {
   position: relative;
   padding: 90px;
   margin: auto;
+}
+
+.online-img {
+  height: 25px;
+}
+
+.offline-img {
+  height: 25px;
+}
+
+.admin-img {
+  height: 25px;
+}
+
+.member-img {
+  height: 25px;
+}
+
+#membersListTable td, #membersListTable th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#membersListTable tr:nth-child(even){background-color: #f2f2f2;}
+
+#membersListTable tr:hover {background-color: #ddd;}
+
+#membersListTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+// Signup page button
+.btn-select {
+    position: relative;
+    padding: 0;
+    min-width: 236px;
+    width: 100%;
+    border-radius: 0;
+    margin-bottom: 20px;
+}
+
+.btn-select .btn-select-value {
+    padding: 6px 12px;
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 34px;
+    text-align: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    border-top: none !important;
+    border-bottom: none !important;
+    border-left: none !important;
+}
+
+.btn-select .btn-select-arrow {
+    float: right;
+    line-height: 20px;
+    padding: 6px 10px;
+    top: 0;
+}
+
+.btn-select ul {
+    display: none;
+    background-color: white;
+    color: black;
+    clear: both;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: none !important;
+    position: absolute;
+    left: -1px;
+    right: -1px;
+    top: 33px;
+    z-index: 999;
+}
+
+.btn-select ul li {
+    padding: 3px 6px;
+    text-align: left;
+}
+
+.btn-select ul li:hover {
+    background-color: #f4f4f4;
+}
+
+.btn-select ul li.selected {
+    color: white;
+}
+
+/* Primary Start */
+.btn-select.btn-primary:hover, .btn-select.btn-primary:active, .btn-select.btn-primary.active {
+    border-color: #286090;
+}
+
+.btn-select.btn-primary ul li.selected {
+    background-color: #2e6da4;
+    color: white;
+}
+
+.btn-select.btn-primary ul {
+    border: #2e6da4 1px solid;
+}
+
+.btn-select.btn-primary .btn-select-value {
+    background-color: #428bca;
+    border: #2e6da4 1px solid;
+}
+
+.btn-select.btn-primary:hover, .btn-select.btn-primary.active {
+    background-color: #286090;
+}
+
+// This following is for the profile page
+.profileBody {
+  background-color:#f3f3f3;
+  color:#444;
+}
+
+.fa {
+  color:#eee;
+}
+
+#userList {
+  display:none;
+}
+
+#loader {
+  position:absolute;
+  z-index:2;
+  width:100%;
+  text-align:center;
+  top:40%;
 }

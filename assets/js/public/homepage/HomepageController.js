@@ -9,7 +9,7 @@ angular.module('HomepageModule').controller('HomepageController', ['$scope', '$h
 	// 	 window.location = '/signup';
 	//  }
 
-	$scope.submitLoginForm = function (){
+	$scope.submitLoginForm = function () {
 
     // Set the loading state (i.e. show loading spinner)
     $scope.loginForm.loading = true;
