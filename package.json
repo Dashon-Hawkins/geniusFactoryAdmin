@@ -23,7 +23,7 @@
     "machinepack-passwords": "^2.3.0",
     "mongodb": "^2.2.30",
     "node-waf": "^1.0.0",
-    "rc": "1.0.1",
+    "rc": "1.2.7",
     "sails": "~0.12.13",
     "sails-disk": "~0.10.9"
   },
