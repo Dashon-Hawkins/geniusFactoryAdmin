@@ -1,0 +1,36 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.12.0
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:lodash:20180130':
+    - sails-disk > waterline-cursor > lodash:
+        patched: '2018-07-03T00:15:15.592Z'
+    - machinepack-emailaddresses > machine > lodash:
+        patched: '2018-07-03T00:15:15.592Z'
+    - machinepack-emailaddresses > machine > switchback > lodash:
+        patched: '2018-07-03T00:15:15.592Z'
+    - machinepack-passwords > machine > lodash:
+        patched: '2018-07-03T00:15:15.592Z'
+    - machinepack-passwords > machine > rttc > lodash:
+        patched: '2018-07-03T00:15:15.592Z'
+    - machinepack-passwords > machine > switchback > lodash:
+        patched: '2018-07-03T00:15:15.592Z'
+    - sails-disk > waterline-criteria > lodash:
+        patched: '2018-07-03T00:15:15.592Z'
+    - machinepack-emailaddresses > machine > rttc > lodash:
+        patched: '2018-07-03T00:15:15.592Z'
+    - sails > include-all > lodash:
+        patched: '2018-07-03T00:15:15.592Z'
+    - sails > captains-log > lodash:
+        patched: '2018-07-03T00:15:15.592Z'
+    - sails > sails-disk > waterline-criteria > lodash:
+        patched: '2018-07-03T00:15:15.592Z'
+    - sails > sails-disk > waterline-cursor > lodash:
+        patched: '2018-07-03T00:15:15.592Z'
+    - sails > rttc > lodash:
+        patched: '2018-07-03T00:15:15.592Z'
+    - sails > sails-util > lodash:
+        patched: '2018-07-03T00:15:15.592Z'
+    - sails > skipper > lodash:
+        patched: '2018-07-03T00:15:15.592Z'
