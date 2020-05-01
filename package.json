@@ -25,11 +25,14 @@
     "node-waf": "^1.0.0",
     "rc": "1.0.1",
     "sails": "~0.12.13",
-    "sails-disk": "~0.10.9"
+    "sails-disk": "~0.10.9",
+    "snyk": "^1.316.1"
   },
   "scripts": {
     "debug": "node debug app.js",
-    "start": "node app.js"
+    "start": "node app.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "main": "app.js",
   "repository": {
@@ -37,5 +40,6 @@
     "url": "git://github.com/dashonhawkins/geniusFactoryAdmin.git"
   },
   "author": "dashonhawkins",
-  "license": ""
+  "license": "",
+  "snyk": true
 }
